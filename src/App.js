@@ -38,9 +38,6 @@ function App() {
   // }
 
   const addItemHandler = (task) => {
-    console.log('baba');
-    console.log(tasks);
-
     // const sampleTask = {
     //   id: 99, 
     //   text: "baba", 
@@ -54,11 +51,21 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   }
 
+  const buyItemHandler = (id) => {
+    const selectedTask = tasks.filter((task) => task.id == id)[0]; 
+    selectedTask.isBuy = !selectedTask.isBuy
+    setTasks([...tasks]);
+  }
+
   return (
-    <div>
+    <div className="main">
       <h1> Grocessery List </h1>
-      <Items items = {tasks}  onRemoveItem={removeItemHandler} /> 
-      <AddItemButton onAdd={addItemHandler}/>
+      <div class="container">
+        <AddItemButton onAdd={addItemHandler}/>
+        <div class="items">
+          <Items items = {tasks}  onRemoveItem={removeItemHandler} onBuyItem={buyItemHandler}/> 
+        </div>
+      </div>
     </div>
   );
 }

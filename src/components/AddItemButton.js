@@ -26,7 +26,7 @@ function AddItemButton( {onAdd}) {
     return (
         <form onSubmit={ addTask }>
             <br/>
-             <label> Item: </label><input  type="text" value={text} placeholder='Add Text' onChange={(e) => setText(e.target.value)}/>
+             <label> Item Name </label><input  type="text" value={text} placeholder='Add Text' onChange={(e) => setText(e.target.value)}/>
              <br/>
              <input type="hidden" name="isBuy" />
             
