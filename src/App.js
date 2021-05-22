@@ -3,11 +3,17 @@ import Items from './components/Items';
 import Item from './components/Item';
 import ÁddItemButton from './components/AddItemButton';
 import AddItemButton from './components/AddItemButton';
-import {useState} from 'react';
+import { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
 
-  const[tasks, setTasks]  = useState([
+  const [tasks, setTasks] = useState([
     {
       id: 1,
       text: 'Apples',
@@ -44,7 +50,7 @@ function App() {
     //   isBusy: false
     // };
 
-   setTasks([...tasks, task]);
+    setTasks([...tasks, task]);
   }
 
   const removeItemHandler = (id) => {
@@ -52,21 +58,49 @@ function App() {
   }
 
   const buyItemHandler = (id) => {
-    const selectedTask = tasks.filter((task) => task.id == id)[0]; 
+    const selectedTask = tasks.filter((task) => task.id == id)[0];
     selectedTask.isBuy = !selectedTask.isBuy
     setTasks([...tasks]);
   }
 
   return (
-    <div className="main">
-      <h1> Grocessery List </h1>
-      <div class="container">
-        <AddItemButton onAdd={addItemHandler}/>
-        <div class="items">
-          <Items items = {tasks}  onRemoveItem={removeItemHandler} onBuyItem={buyItemHandler}/> 
+    // <div className="main">
+    //   <h1> Grocessery List </h1>
+    //   <div class="container">
+    //     <AddItemButton onAdd={addItemHandler}/>
+    //     <div class="items">
+    //       <Items items = {tasks}  onRemoveItem={removeItemHandler} onBuyItem={buyItemHandler}/> 
+    //     </div>
+    //   </div>
+    // </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/additem">Add Item </Link></li>
+          </ul>
+        </nav>
+
+        <div className="main">
+          <div class="container">
+            <Switch>
+              <Route path="/additem">
+                <AddItemButton onAdd={addItemHandler} />
+              </Route>
+              <Route path="/">
+                <h1> Grocessery List </h1>
+                <div className='items'>
+                  <Items items={tasks} onRemoveItem={removeItemHandler} onBuyItem={buyItemHandler} />
+                </div>
+              </Route>
+            </Switch>
+          </div>
         </div>
+
+
       </div>
-    </div>
+    </Router >
   );
 }
 

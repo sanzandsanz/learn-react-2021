@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
-    "bgtm-engine-scss": "^2.0.1"
+    "bgtm-engine-scss": "^2.0.1",
+    "react-router-dom": "^5.2.0"
   }
 }
